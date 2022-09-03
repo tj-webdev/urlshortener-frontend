@@ -1,0 +1,50 @@
+*{
+  font-family: 'Nunito', sans-serif;
+}
+
+body{
+  background-color: #E7EDFD;
+}
+
+
+/* colors -- start */
+
+.blue-color{
+  color: #4649EE;
+}
+
+.dark-blue-color{
+  color: #1A0F91;
+}
+
+.blue-color-bg{
+  background-color: #4649EE;
+  border-color: #4649EE;
+}
+
+.dark-blue-color-bg{
+  background-color: #1A0F91;
+}
+
+/* color -- end */
+
+.active{
+  border-color: #4649EE !important;
+  color: #fff !important;
+  background-color: #4649EE !important;
+}
+
+.navbar-brand{
+  color: #1A0F91;
+}
+
+.navbar-brand:hover{
+  color: #1A0F91;
+}
+
+
+
+label{
+  font-weight: 550;
+  margin-bottom: 5px !important;
+}
