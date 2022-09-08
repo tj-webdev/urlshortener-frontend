@@ -29,13 +29,13 @@ function App() {
           :(
             <>
               <Route path='/' element={<Home />} />
-              <Route path='/:id' element={<Redirect />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
             </>
           )
         }
-        <Route path='*' element={<NotFound />} />
+        <Route path='/404' element={<NotFound />} />
+        <Route path='/:id' element={<Redirect />} />
       </Routes>
     </>
   );

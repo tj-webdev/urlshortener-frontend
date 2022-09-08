@@ -17,7 +17,7 @@ export default function Analytics() {
       setData(request.data);
     }
     catch(err){
-      navigate('/invalidlink',{replace: true});
+      navigate('/404',{replace: true});
     }
   }
 
@@ -36,7 +36,7 @@ export default function Analytics() {
           <thead className='blue-color-bgonly text-light'>
             <tr>
               <th scope="col">#</th>
-              <th scope="col" width="50%">Referer URL</th>
+              <th scope="col" width="50%">Referrer URL</th>
               <th scope="col">Clicks</th>
             </tr>
           </thead>

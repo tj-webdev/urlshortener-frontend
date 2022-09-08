@@ -9,17 +9,17 @@ export default function Redirect() {
 
   const getUrl = async ()=>{
     try{
-      const request = await axios.get('http://localhost:4000/'+params.id);
+      const request = await axios.get('http://localhost:4000/'+params.id+'?referer='+document.referrer);
       window.location = request.data;
     }
     catch(err){
-      navigate('/invalidlink',{replace: true});
+      navigate('/404',{replace: true});
     }
   }
 
   getUrl();
 
   return(
-    <h5 className='text-center mt-5'>Loading...</h5>
+    <h5 className='text-center mt-5'>Redirecting...</h5>
   )
 }
