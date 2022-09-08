@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import userAuthStore from './auth/userAuth';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
   email: '',
@@ -15,11 +17,13 @@ const validationSchema = Yup.object().shape({
 
   password: Yup.string()
     .required('Password is required')
-    .min(6,'Minium password length is 6 characters')
 });
 
 
 export default function Login() {
+
+  const setAuth = userAuthStore((state) => state.setAuth);
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -27,8 +31,13 @@ export default function Login() {
   const onSubmit = async (formData) => {
     setLoading(true);
     try{
-      const request = await axios.post('http://localhost:4000/user/login',formData,{withCredentials: true});
-      console.log(request.data);
+      const request = await axios.post('http://localhost:4000/user/login',
+        formData,
+        {withCredentials: true}
+      );
+      const data = request.data;
+      setAuth(data);
+      navigate('/',{replace: true});
     }
     catch(err){
       setLoading(false);

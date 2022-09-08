@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import userAuthStore from './auth/userAuth';
+import {useNavigate} from "react-router-dom";
+
 const axios = require('axios');
 
 
@@ -26,14 +29,22 @@ const validationSchema = Yup.object().shape({
 
 export default function Singup() {
 
+  const setAuth = userAuthStore((state) => state.setAuth);
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
   
   const onSubmit = async (formData) => {
     setLoading(true);
     try{
-      const request = await axios.post('http://localhost:4000/user/register',formData,{withCredentials: true});
-      console.log(request.data);
+      const request = await axios.post('http://localhost:4000/user/register',
+        formData,
+        {withCredentials: true}
+      );
+      const data = request.data;
+      setAuth(data);
+      navigate('/',{replace: true});
     }
     catch(err){
       setError(err.response.data);

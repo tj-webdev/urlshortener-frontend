@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {NavLink, Link} from 'react-router-dom';
+import Logout from '../Logout';
+import userAuthStore from '../auth/userAuth';
 
 export default function Header() {
+  const {userAuth, fetch} = userAuthStore((state)=> ({userAuth: state.userAuth, fetch: state.fetch}));
+  useEffect(()=>{
+    fetch();
+  },[]);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg">
@@ -16,10 +23,19 @@ export default function Header() {
                 <NavLink className="btn" to="/">Home</NavLink>
               </li>
             </ul>
-            <div>
-              <NavLink to='/login' className="btn fw-bold me-3">Log in</NavLink>
-              <NavLink to='/signup' className="btn fw-bold">Sign up</NavLink>
-            </div>
+            {
+              (userAuth.name && userAuth.loggedIn) ? (
+                <div className='d-flex align-items-center'>
+                  <h6 className='mb-0 me-3'>Welcome, {userAuth.name}</h6>
+                  <Logout />
+                </div>
+              ) : (
+              <div>
+                <NavLink to='/login' className="btn fw-bold me-3">Log in</NavLink>
+                <NavLink to='/signup' className="btn fw-bold">Sign up</NavLink>
+              </div>
+              )
+            }            
           </div>
         </div>
       </nav>

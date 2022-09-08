@@ -17,6 +17,10 @@ body{
   color: #1A0F91;
 }
 
+.blue-color-bgonly{
+  background-color: #4649EE;
+}
+
 .blue-color-bg{
   background-color: #4649EE;
   border-color: #4649EE;
