@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from "./components/Header";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -7,35 +7,37 @@ import Dashboard from "./Dashboard";
 import NotFound from './NotFound';
 import Analytics from './Analytics';
 import Redirect from './components/Redirect';
+import PrivateRoutes from './components/PrivateRoutes';
 
 import userAuthStore from './auth/userAuth';
+import { useEffect } from 'react';
 
 function App() {
 
-  const userAuth = userAuthStore((state) => state.userAuth);
+  const {userAuth, fetch} = userAuthStore((state)=> ({userAuth: state.userAuth, fetch: state.fetch}));
+  useEffect(()=>{
+    fetch();
+  },[]);
+
+  console.log('red')
 
   return (
     <>
       <Header />
       <Routes>
-        {
-          (userAuth.name && userAuth.loggedIn) ? 
-          (
-            <>
-              <Route path='/' element={<Dashboard />} />
-              <Route path='/analytics/:id' element={<Analytics />} />
-            </>
-          )
-          :(
-            <>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<Signup />} />
-            </>
-          )
-        }
-        <Route path='/404' element={<NotFound />} />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/analytics/:id' element={<Analytics />} />
+        </Route>
+
+        <Route exact path='/' element={ !userAuth.loggedIn ?  <Home /> : <Navigate to='/dashboard' replace /> } />
+
+        <Route path='/login' element={ !userAuth.loggedIn ? <Login /> : <Navigate to='/dashboard' replace /> } />
+        <Route path='/signup' element={ !userAuth.loggedIn ? <Signup /> : <Navigate to='/dashboard' replace /> } />
+
         <Route path='/:id' element={<Redirect />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );

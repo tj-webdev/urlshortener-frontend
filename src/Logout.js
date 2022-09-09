@@ -10,14 +10,9 @@ export default function Logout() {
 
   async function logout()
   {
-    try{
-      await axios.get('http://localhost:4000/user/logout',{withCredentials: true});
-      setAuth({name: undefined, loggedIn: false});
-      navigate('/',{replace: true});
-    }
-    catch(err){
-      console.log(err);
-    }
+    await axios.get('http://localhost:4000/user/logout',{withCredentials: true});
+    setAuth({name: undefined, loggedIn: false});
+    navigate('/',{replace: true});
   }
 
   return (

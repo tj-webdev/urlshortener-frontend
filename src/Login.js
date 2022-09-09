@@ -37,7 +37,7 @@ export default function Login() {
       );
       const data = request.data;
       setAuth(data);
-      navigate('/',{replace: true});
+      navigate('/dashboard',{replace: true});
     }
     catch(err){
       setLoading(false);

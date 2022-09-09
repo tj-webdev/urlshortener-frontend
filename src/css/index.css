@@ -52,3 +52,7 @@ label{
   font-weight: 550;
   margin-bottom: 5px !important;
 }
+
+input,button{
+  box-shadow: none!important;
+}

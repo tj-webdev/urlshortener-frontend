@@ -44,11 +44,11 @@ export default function Singup() {
       );
       const data = request.data;
       setAuth(data);
-      navigate('/',{replace: true});
+      navigate('/dashboard',{replace: true});
     }
     catch(err){
-      setError(err.response.data);
       setLoading(false);
+      setError(err.response.data);
     }
   }
 
