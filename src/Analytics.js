@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 export default function Analytics() {
@@ -29,6 +29,8 @@ export default function Analytics() {
     <div>
       
       <div className='container mt-5'>
+
+        <Link to="/dashboard" className="btn btn-info text-light btn-sm mb-4">Go Back</Link>
 
         <h5 className='fw-bold mb-3'>Total Clicks: { data.totalClicks }</h5>
 

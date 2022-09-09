@@ -19,8 +19,6 @@ function App() {
     fetch();
   },[]);
 
-  console.log('red')
-
   return (
     <>
       <Header />
@@ -36,6 +34,7 @@ function App() {
         <Route path='/login' element={ !userAuth.loggedIn ? <Login /> : <Navigate to='/dashboard' replace /> } />
         <Route path='/signup' element={ !userAuth.loggedIn ? <Signup /> : <Navigate to='/dashboard' replace /> } />
 
+        <Route path='/404' element={<NotFound />} />
         <Route path='/:id' element={<Redirect />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

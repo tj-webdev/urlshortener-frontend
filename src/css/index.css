@@ -56,3 +56,8 @@ label{
 input,button{
   box-shadow: none!important;
 }
+
+
+.table-responsive table{
+  min-width: 700px;
+}

@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import userAuthStore from './auth/userAuth';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
   longUrl:''
@@ -12,8 +13,6 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   longUrl: Yup.string().required('Required!').url('Enter a valid URL!')
 });
-
-
 
 
 export default function Dashboard() {
@@ -26,7 +25,7 @@ export default function Dashboard() {
       setUrlData(request.data);
     }
     catch(err){
-      console.log(err.response.data);
+      setAuth({name: undefined, loggedIn: false});
     }
   }
 
@@ -99,23 +98,25 @@ export default function Dashboard() {
 
 
       <div className='container mt-5'>
-        <table className="table table-hover">
-          <thead className='blue-color-bgonly text-light'>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" width="50%">Long URL</th>
-              <th scope="col">Short ID</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              urlData.map((url,i)=>{
-                return <Shorturls data={url} index={i} key={i} />
-              })
-            }
-          </tbody>
-        </table>
+        <div className='table-responsive'>
+          <table className="table table-hover">
+            <thead className='blue-color-bgonly text-light'>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" width="50%">Long URL</th>
+                <th scope="col">Short ID</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                urlData.map((url,i)=>{
+                  return <Shorturls data={url} index={i} key={i} />
+                })
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
 
     </div>
