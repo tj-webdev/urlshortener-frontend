@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-
+import userAuthStore from './auth/userAuth';
 
 export default function Analytics() {
+
+  const setAuth = userAuthStore((state)=>state.setAuth);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -11,13 +13,18 @@ export default function Analytics() {
 
   async function getUrlAnalytics(){
     try{
-      const request = await axios.get('http://localhost:4000/shorturl/analytics/'+params.id,
+      const request = await axios.get('/shorturl/analytics/'+params.id,
         {withCredentials: true}
       );
       setData(request.data);
     }
     catch(err){
-      navigate('/404',{replace: true});
+      if(err.response.data.loggedIn===false){
+        setAuth({name: undefined, loggedIn: false});
+      }
+      else{
+        navigate('/404',{replace: true});
+      }
     }
   }
 

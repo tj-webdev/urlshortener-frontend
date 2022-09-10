@@ -13,7 +13,7 @@ export default function Shorturls(props) {
       <th scope="col">{props.data.longUrl}</th>
       <th scope="col">{props.data.shortUrl}</th>
       <th scope="col">
-        <button onClick={copyToClipboard('http://localhost:3000/'+props.data.shortUrl)} className='btn btn-sm btn-info text-light shadow-none me-3'>
+        <button onClick={copyToClipboard(process.env.REACT_APP_BASE_URL+props.data.shortUrl)} className='btn btn-sm btn-info text-light shadow-none me-3'>
           Copy
         </button>
         <Link to={"/analytics/"+props.data._id} className="btn btn-primary btn-sm">

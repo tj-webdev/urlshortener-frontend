@@ -38,7 +38,7 @@ export default function Singup() {
   const onSubmit = async (formData) => {
     setLoading(true);
     try{
-      const request = await axios.post('http://localhost:4000/user/register',
+      const request = await axios.post('/user/register',
         formData,
         {withCredentials: true}
       );

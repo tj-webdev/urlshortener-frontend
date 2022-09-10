@@ -11,7 +11,7 @@ export default function Redirect() {
     const getUrl = async ()=>{
       const referer = document.referrer ? '?referer='+document.referrer : '';
       try{
-        const request = await axios.get('http://localhost:4000/'+params.id+referer);
+        const request = await axios.get('/'+params.id+referer);
         window.location = request.data;
       }
       catch(err){

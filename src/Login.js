@@ -31,7 +31,7 @@ export default function Login() {
   const onSubmit = async (formData) => {
     setLoading(true);
     try{
-      const request = await axios.post('http://localhost:4000/user/login',
+      const request = await axios.post('/user/login',
         formData,
         {withCredentials: true}
       );

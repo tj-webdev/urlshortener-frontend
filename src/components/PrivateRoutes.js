@@ -7,6 +7,6 @@ export default function PrivateRoutes() {
   const userAuth = userAuthStore((state) => state.userAuth);
 
   return (
-    !userAuth.loggedIn ? <Navigate to='/login' /> : <Outlet />
+    !userAuth.loggedIn ? <Navigate to='/' /> : <Outlet />
   )
 }

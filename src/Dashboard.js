@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import userAuthStore from './auth/userAuth';
-import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
   longUrl:''
@@ -17,11 +16,12 @@ const validationSchema = Yup.object().shape({
 
 export default function Dashboard() {
 
+  const setAuth = userAuthStore((state)=>state.setAuth);
   const [urlData,setUrlData] = useState([]);
 
   async function getUrlData(){
     try{
-      const request = await axios.get('http://localhost:4000/getshorturl',{withCredentials: true});
+      const request = await axios.get('/getshorturl',{withCredentials: true});
       setUrlData(request.data);
     }
     catch(err){
@@ -31,21 +31,18 @@ export default function Dashboard() {
 
   useEffect(()=>{ getUrlData() },[]);
 
-  const setAuth = userAuthStore((state)=>state.setAuth);
-
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
   
   const onSubmit = async (formData, onSubmit) => {
     setLoading(true);
     try{
-      const request = await axios.post('http://localhost:4000/shorturl',
+      const request = await axios.post('/shorturl',
         formData,
         {withCredentials: true}
       );
       setLoading(false);
-      getUrlData((prev)=> [request.data,...prev]);
-      
+      getUrlData((prev) => [request.data,...prev]);
       onSubmit.resetForm();
     }
     catch(err){

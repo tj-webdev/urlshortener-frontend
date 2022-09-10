@@ -11,7 +11,7 @@ const userAuthStore = create((set)=>({
   setAuth: (userData) => set({userAuth: userData}),
 
   fetch: async () => {
-    const request = await axios.get('http://localhost:4000/user/isloggedin',
+    const request = await axios.get('/user/isloggedin',
       {withCredentials: true}
     );
     const data = request.data;
