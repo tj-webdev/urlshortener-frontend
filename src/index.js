@@ -6,7 +6,7 @@ import './css/index.css';
 
 // configure axios defaults
 import axios from 'axios';
-axios.defaults.baseURL="http://localhost:4000";
+axios.defaults.baseURL=process.env.REACT_APP_BACKEND_URL;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
