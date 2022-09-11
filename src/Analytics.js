@@ -53,7 +53,7 @@ export default function Analytics() {
             {
               data.refererUrls && data.refererUrls.map((url,i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={i} className="align-middle">
                     <td>{i+1}</td>
                     <td>{url.url}</td>
                     <td>{url.clicks}</td>
